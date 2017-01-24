@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class QuickSort {
+public class Main {
 
 	public static void main(String[] args) {
 		System.out.printf("%-20s%-20s%-20s%-20s%n", "Sort", "Size", "Comparison", "Time");
