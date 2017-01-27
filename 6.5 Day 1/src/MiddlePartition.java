@@ -70,6 +70,10 @@ public class MiddlePartition {
 
 		while (true) {
 
+			//turns the middle to the partition
+			int mid = (left + right) / 2;
+			swap(data, left, mid);
+			
 			// move right "pointer" toward left
 			parCount++;
 			while (left < right && data[left].compareTo(data[right]) < 0) {
@@ -98,7 +102,7 @@ public class MiddlePartition {
 	static int quickSort(String data[], int n) {
 		parCount = 0;
 		//Change left to middle
-		quickSortRecursive(data, data.length / 2, n - 1);
+		quickSortRecursive(data, 0, n - 1);
 		return parCount;
 	}
 
