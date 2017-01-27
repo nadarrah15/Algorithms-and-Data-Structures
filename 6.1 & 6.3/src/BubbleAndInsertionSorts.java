@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Main {
+public class BubbleAndInsertionSorts {
 
 	public static void main(String[] args) {
 		System.out.printf("%-20s%-20s%-20s%-20s%n", "Sort", "Size", "Comparison", "Time");
