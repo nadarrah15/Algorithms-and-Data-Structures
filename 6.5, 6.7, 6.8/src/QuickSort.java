@@ -16,10 +16,40 @@ public class QuickSort {
 			return;
 		
 		int pivot = partition(array, left, right);
-		quickSort(array, left, pivot-1);
-		quickSort(array, pivot+1, right);
+		if(pivot - 1 - left <= 15)
+			insertionSort(array, left, pivot - 1);
+		else
+			quickSort(array, left, pivot-1);
+		
+		if(right - (pivot + 1) <= 15)
+			insertionSort(array, pivot + 1, right);
+		else
+			quickSort(array, pivot+1, right);
 	}
 	
+	static void insertionSort(int[] s, int left, int right){
+		
+		int numSorted = 1 + left;
+		int index;
+		int n = right - left;
+		
+		while(numSorted < n){
+			
+			int temp = s[numSorted];
+			
+			for(index = numSorted; index > 0; index--){
+				if(temp< s[index - 1]){
+					s[index] = s[index - 1];
+				}
+				else {
+					break;
+				}
+			}
+			
+			s[index] = temp;
+			numSorted++;
+		}
+	}
 	
 	private static int partition(int[] array, int left, int right) {
 		// choose a pivot value, swap it into the leftmost position
