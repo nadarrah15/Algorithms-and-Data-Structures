@@ -19,12 +19,15 @@ public class HomeworkVector<E extends Comparable<E>> extends AbstractStructure<E
 	// post: returns true if the value is in the vector
 	{
 		int i = data.indexOf(value);
+		boolean flag = false;
 		if(i != -1){
-			data.addFirst(data.remove(i));
-			return true;
+			flag = true;
+			
+			if(i != 0)
+				data.addFirst(data.remove(i));
 		}
 		
-		return false;
+		return flag;
 	}
 	
 	@Override
