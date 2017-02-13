@@ -26,10 +26,14 @@ public abstract class BinaryTree<E> {
 	public abstract TreeIterator<E> iterator();
 	
 	//Homework, accessor to the size variable.
-	public abstract int getSize();
+	public  int size(){
+		return size;
+	}
 	
-	//Homework, mutator to the size variable. Set to protected so that the subclasses are the only classe that can mess with the size variable.
-	protected abstract void setSize(int i);
+	//Homework, mutator to the size variable. Set to protected so that the subclasses are the only classes that can mess with the size variable.
+	protected void setSize(int i){
+		size = i;
+	}
 	
 	//Homework
 	public abstract int getHeight();
