@@ -1,5 +1,6 @@
 package lvc.cds.trees;
 
+
 public abstract class BinaryTree<E> {
 	private Node<E> root;
 	
