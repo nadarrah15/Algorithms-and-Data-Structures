@@ -6,6 +6,8 @@ public class RandomTree<E> extends BinaryTree<E> {
 
 	@Override
 	public void insert(E value) {
+		setSize(size() + 1);
+		
 		// randomly walk down the tree until we find a leaf position, and put the value there.
 		Random r = new Random();
 		
@@ -84,18 +86,6 @@ public class RandomTree<E> extends BinaryTree<E> {
 	public TreeIterator iterator() {
 		// create an iterator pointing at the first element in the tree.
 		return new PreorderTreeIterator<E>(getRoot());
-	}
-
-	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected void setSize(int i) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
