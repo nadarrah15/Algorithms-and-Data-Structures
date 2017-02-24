@@ -308,5 +308,63 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		// we would need to restore balance along the impacted path -- how would that
 		// work?
 		
+		if(contains(node.data)){
+			TreeIterator<E> ti = find(node.data);
+			
+			Node<E> cur = ti.getCurrent();
+			
+			if(cur.left != null && cur.right != null){
+				Node<E> pred = cur.left;
+				while(pred.right != null)
+					pred = pred.right;
+				
+				if(cur == getRoot())
+					setRoot(pred);
+				
+				//if there was no right subtree of cur.left
+				if(pred == cur.left){
+					if(cur.parent != null){
+						if(cur.parent.left == cur)
+							cur.parent.left = pred;
+						else
+							cur.parent.right = pred;
+					}
+					
+					pred.parent = cur.parent;
+					cur = null;
+					return;
+				}
+				
+				//else we have traversed down a right subtree
+				pred.parent.right = null;
+				if(cur.parent != null){
+					if(cur.parent.left == cur)
+						cur.parent.left = pred;
+					else
+						cur.parent.right = pred;
+					pred.parent = cur.parent;
+				}
+//				pointer.left = cur.left;
+//				cur.left.parent = pointer;
+				pred.right = cur.right;
+			}
+			
+			else if(cur.left != null){
+				
+			}
+			else if(cur.right != null){
+				
+			}
+			else{
+				if(cur == cur.parent.left)
+					cur.parent.left = null;
+				else
+					cur.parent.right = null;
+				
+				cur = new Node<E>(null, null, null, null);
+			}
+		}
+		
+		
 	}
 }
