@@ -82,6 +82,13 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		
 	}
 	
+	private void adjustHeight(Node<E> node){
+		int heightLeft = (node.left == null) ? -1 : node.left.height;
+		int heightRight = (node.right == null) ? -1 : node.right.height;
+		
+		node.height = Math.max(heightLeft, heightRight) + 1;
+	}
+	
 	// Four node rotation methods. See the reading on canvas.
 	private void rotateWithLeftChild(Node<E> cur) {
 		Node<E> parent = cur.parent;
@@ -107,19 +114,103 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		cur.parent = L;
 		
 		// adjust heights?
-		
+		//N height needs to be adjusted first since L's height relies on N
+		adjustHeight(cur);
+		adjustHeight(L);
 	}
 
 	private void rotateWithRightChildOfLeft(Node<E> cur) {
+		Node<E> parent = cur.parent;
+		Node<E> LR = cur.left.right;
+		Node<E> L = cur.left;
+		if(parent != null){
+			if(parent.left == cur)
+				parent.left = LR;
+			else
+				parent.right = LR;
+		}
+		LR.parent = parent;
 		
+		if(LR.left != null){
+			L.right = LR.left;
+			LR.left.parent = L;
+		}
+		
+		if(LR.right != null){
+			cur.left = LR.right;
+			LR.right.parent = cur;
+		}
+		
+		LR.left = L;
+		L.parent = LR;
+		
+		LR.right = cur;
+		cur.parent = LR;
+		
+		//adjust L and cur height first because LR height depends on their heights
+		adjustHeight(L);
+		adjustHeight(cur);
+		adjustHeight(LR);
 	}
 
 	private void rotateWithRightChild(Node<E> cur) {
+		Node<E> parent = cur.parent;
+		Node<E> R = cur.right;
+		if(parent != null){
+			if(parent.left == cur)
+				parent.left = R;
+			else
+				parent.right = R;
+		}
+		R.parent = parent;
 		
+		// attach RL to N as right child
+		cur.right = R.left;
+		if (cur.right != null)
+			cur.right.parent = cur;
+		
+		// attach N to L as right child
+		R.left = cur;
+		cur.parent = R;
+		
+		// adjust heights?
+		//N height needs to be adjusted first since L's height relies on N
+		adjustHeight(cur);
+		adjustHeight(R);
 	}
 
 	private void rotateWithLeftChildOfRight(Node<E> cur) {
+		Node<E> parent = cur.parent;
+		Node<E> RL = cur.right.left;
+		Node<E> R = cur.right;
+		if(parent != null){
+			if(parent.right == cur)
+				parent.right = RL;
+			else
+				parent.right = RL;
+		}
+		RL.parent = parent;
 		
+		if(RL.left != null){
+			R.right = RL.left;
+			RL.left.parent = R;
+		}
+		
+		if(RL.left != null){
+			cur.right = RL.left;
+			RL.left.parent = cur;
+		}
+		
+		RL.right = R;
+		R.parent = RL;
+		
+		RL.left = cur;
+		cur.parent = RL;
+		
+		//adjust R and cur height first because RL height depends on their heights
+		adjustHeight(R);
+		adjustHeight(cur);
+		adjustHeight(RL);
 	}
 
 	
