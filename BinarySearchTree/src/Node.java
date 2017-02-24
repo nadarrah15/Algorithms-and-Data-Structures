@@ -1,11 +1,11 @@
 
-
 class Node<E> {
 	// no access modifier -- access is "package" -- only methods of classes
 	// in this package have access
 	Node<E> parent;
 	Node<E> left;
 	Node<E> right;
+	int height;
 	E data;
 	
 	Node(E data) {
@@ -21,29 +21,11 @@ class Node<E> {
 		this.parent = parent;
 		this.left = left;
 		this.right = right;
+		int heightLeft = (left == null) ? -1 : left.height;
+		int heightRight = (right == null) ? -1 : right.height;
+		
+		this.height = Math.max(heightLeft, heightRight) + 1;
 	}
 	
-	public int height(){
-		int l, r;
-		
-		if(left == null)
-			l = 0;
-		else
-			l = left.height();
-		
-		if(right == null)
-			r = 0;
-		else
-			r = right.height();
-		
-		return 1 + Math.max(l, r);
-	}
-	
-	public int depth(){
-		if(parent == null)
-			return 0;
-		else
-			return 1 + parent.depth();
-	}
 	// nothing else for now.  We will keep this structure private
 }
