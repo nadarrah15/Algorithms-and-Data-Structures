@@ -59,7 +59,7 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			else
 				rotateWithRightChildOfLeft(cur);
 		}
-		else {
+		else if (heightRight > heightLeft + 1) {
 			// figure out which rotation we need
 			int heightRR = (cur.right.right == null) ? -1 : cur.right.right.height; 
 			int heightRL = (cur.right.left == null) ? -1 : cur.right.left.height;
