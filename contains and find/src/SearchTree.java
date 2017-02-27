@@ -17,6 +17,19 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		
 		
 	}
+	
+	//Homework, runs in O(n) because it visits each node once
+	public int slowSize(){
+		return slowSize(getRoot());
+	}
+	
+	private int slowSize(Node<E> node){
+		//base case
+		if(node == null)
+			return 0;
+		else
+			return slowSize(node.left) + slowSize(node.right) + 1;
+	}
 
 	private void insert(Node<E> cur, E value) {
 		// NB: We assume here that cur is not null!!

@@ -33,6 +33,29 @@ public abstract class BinaryTree<E> {
 	// return an iterator referring to the "first" node in the tree.
 	public abstract TreeIterator<E> iterator();
 	
+	//HW I had help from http://www.geeksforgeeks.org/check-whether-binary-tree-complete-not-set-2-recursive-solution/
+	public boolean isComplete(){
+		return isComplete(getRoot(), 0, nodeCount(getRoot()));
+	}
+	
+	private boolean isComplete(Node<E> cur, int index, int num){
+		if(cur == null)
+			return true;
+		
+		if(index >= num)
+			return false;
+		
+		//Recurse for left and right subtree. Their indices are 2 * index + 1 for left, and 2 * index + 2 for right
+		return isComplete(cur.left, 2 * index + 1, num) && isComplete(cur.left, 2 * index + 2, num);
+	}
+	
+	private int nodeCount(Node<E> cur){
+		if(cur == null)
+			return 0;
+		
+		return 1 + nodeCount(cur.left) + nodeCount(cur.right);
+	}
+	
 	// get the root of the tree.
 	protected Node<E> getRoot() {
 		return root;

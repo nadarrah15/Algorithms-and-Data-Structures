@@ -51,31 +51,32 @@ public class SearchTree<E> extends BinaryTree<E> {
 			return slowSize(node.left) + slowSize(node.right) + 1;
 	}
 	
-	//Homework
+	
+
 	@Override
 	public boolean contains(E value) {
-		return contains(value, getRoot());
+		return contains(getRoot(), value);
+	
 	}
-
-	// is value in the subtree rooted at cur?
-	private boolean contains(E value, Node<E> cur) {
+	
+	private boolean contains(Node<E> cur, E value) {
 		if (cur == null)
 			return false;
-		
-		// check if the value is in the current node
-		else if(value == cur.data)
+		else if(cur.data == value)
 			return true;
-		// check (recursively) if it's in the left subtree
-		// check (recursively) if it's in the right subtree
-		else
-			return contains(value, cur.left) || contains(value, cur.right);
+		
+		return contains(cur.left, value) || contains(cur.right, value);
 	}
 
 	@Override
-	public TreeIterator find(E value) {
-		// TODO Auto-generated method stub
+	public TreeIterator<E> find(E value) {
+		// TODO implement me!!
+		InorderTreeIterator<E> it = new InorderTreeIterator<E>(getRoot());
+		E target = it.next();
+		while(it.hasNext() && !target.equals(value))
+			target = it.next();
 		
-		return null;
+		return it;
 	}
 
 	@Override
