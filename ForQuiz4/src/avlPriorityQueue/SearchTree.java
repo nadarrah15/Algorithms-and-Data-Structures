@@ -314,9 +314,48 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	}
 
 	private void remove(Node<E> node) {
-		// remove this node from the tree.  Recursive, algorithm described in class.
-		// we would need to restore balance along the impacted path -- how would that
-		// work?
+		// step 1 - if node is a leaf, just kill it
+		if (node.left == null && node.right == null) {
+			if (node.parent == null) 
+				setRoot(null);
+			else if (node.parent.left == node) 
+				node.parent.left = null;
+			else
+				node.parent.right = null;
+		}
+		
+		// step 2 -- if the tree has just one child, promote it
+		else if (node.left == null) {
+			// there is just a right child
+			if (node.parent == null) 
+				setRoot(node.right);
+			else if (node.parent.left == node) 
+				node.parent.left = node.right;
+			else
+				node.parent.right = node.right;
+		}
+		else if (node.right == null) {
+			// there is just a left child
+			if (node.parent == null) 
+				setRoot(node.left);
+			else if (node.parent.left == node) 
+				node.parent.left = node.left;
+			else
+				node.parent.right = node.left;
+		}
+		else {
+			// two children.  In this case, we find the predecessor of node, swap its value into node,
+			// and recursively remove the predecessor.
+			Node<E> pred = node.left;
+			while (pred.right != null)
+				pred = pred.right;
+			
+			// copy pred's data up to the node, then remove pred.
+			node.data = pred.data;
+			remove(pred);
+		}
+		
+		// issue: what about rotations and heights? How do we tend to them?
 		
 	}
 }
