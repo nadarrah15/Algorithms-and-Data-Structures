@@ -3,34 +3,44 @@ package avlPriorityQueue;
 public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue<E>{
 
 	private SearchTree<E> tree = new SearchTree<E>();
-
+	private int size = 0;
+	
 	@Override
 	public E getFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		return tree.getRoot().data;
 	}
 
 	@Override
 	public E remove() {
-		// TODO Auto-generated method stub
-		return null;
+		E temp = tree.remove(tree.getRoot().data);
+		if(temp != null)
+			size--;
+		
+		return temp;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(tree.getRoot() != null)
+			return true;
+		
 		return false;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size();
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		size = 0;
+		tree = new SearchTree<E>();
+	}
+
+	@Override
+	public void add(E value) {
+		tree.insert(value);
+		size++;
 	}
 }
