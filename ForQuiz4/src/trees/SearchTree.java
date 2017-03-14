@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package trees;
 
 public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 

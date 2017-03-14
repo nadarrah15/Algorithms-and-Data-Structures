@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package trees;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

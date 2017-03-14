@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package trees;
 
 public class PostorderTreeIterator<E> extends TreeIterator<E> {
 

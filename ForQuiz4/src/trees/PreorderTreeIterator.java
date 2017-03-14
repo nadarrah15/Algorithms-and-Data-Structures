@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package trees;
 
 class PreorderTreeIterator<E> extends TreeIterator<E> {
 	

@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package trees;
 
 class Node<E> {
 	// no access modifier -- access is "package" -- only methods of classes

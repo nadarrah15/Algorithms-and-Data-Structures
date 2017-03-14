@@ -1,27 +1,37 @@
 package avlPriorityQueue;
+import java.util.NoSuchElementException;
+import trees.SearchTree;
+import trees.TreeIterator;
 
 public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue<E>{
 
-	private SearchTree<E> tree = new SearchTree<E>();
-	private int size = 0;
+	private SearchTree<E> tree;
+	private int size;
+	private TreeIterator<E> it;
+	
+	public PriorityTreeQueue(){
+		tree = new SearchTree<E>();
+		size = 0;
+		it = tree.iterator();
+	}
 	
 	@Override
 	public E getFirst() {
-		return tree.getRoot().data;
+		if(size == 0)
+			throw new NoSuchElementException();
+		
+		else 
+			return it.next();
 	}
 
 	@Override
 	public E remove() {
-		E temp = tree.remove(tree.getRoot().data);
-		if(temp != null)
-			size--;
-		
-		return temp;
+		return it.next();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if(tree.getRoot() != null)
+		if(it.hasNext())
 			return true;
 		
 		return false;
@@ -29,13 +39,14 @@ public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue
 
 	@Override
 	public int size() {
-		return size();
+		return size;
 	}
 
 	@Override
 	public void clear() {
-		size = 0;
 		tree = new SearchTree<E>();
+		size = 0;
+		it = tree.iterator();
 	}
 
 	@Override
