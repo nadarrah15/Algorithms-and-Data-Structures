@@ -1,4 +1,4 @@
-package avlPriorityQueue;
+package pQueue;
 
 /**
  * Interface describing an queue of prioritized values.

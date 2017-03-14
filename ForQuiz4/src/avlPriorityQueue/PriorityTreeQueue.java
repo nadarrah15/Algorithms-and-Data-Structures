@@ -1,5 +1,6 @@
 package avlPriorityQueue;
 import java.util.NoSuchElementException;
+import pQueue.PriorityQueue;
 import trees.SearchTree;
 import trees.TreeIterator;
 
