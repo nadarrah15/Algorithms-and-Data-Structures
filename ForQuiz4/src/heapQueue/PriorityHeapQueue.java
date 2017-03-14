@@ -1,8 +1,9 @@
-package HeapQueue;
+package heapQueue;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class PriorityHeapQueue<E extends Comparable<E>> {
 	private ArrayList<E> data;
@@ -60,6 +61,23 @@ public class PriorityHeapQueue<E extends Comparable<E>> {
 		percolateDown(0);
 		
 		size--;	
+		return temp;
+	}
+	
+	public E remove(int index){
+		//Throws an error since throwing a null value would bad since we may want to store null values in the queue
+		if(index >= size)
+			throw new NoSuchElementException();
+		
+		//takes the last value of the heap and places it at the index being removed,
+		//then the last index is removed and we percolateDown or percolateUp to restore heap property
+		E temp = data.get(index);
+		data.set(index, data.get(size - 1));
+		data.remove(size - 1);
+		percolateDown(index);
+		percolateUp(index);
+		
+		size--;
 		return temp;
 	}
 	
