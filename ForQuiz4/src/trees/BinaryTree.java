@@ -12,6 +12,11 @@ public abstract class BinaryTree<E> {
 		this.root = null;
 	}
 	
+	//the garbage collector will completely erase the rest of the tree if there are no external references to any other nodes
+	public void clear(){
+		root = null;
+	}
+	
 	// apply some policy to find a spot, create a node, and insert this data.
 	public abstract void insert(E value);
 	

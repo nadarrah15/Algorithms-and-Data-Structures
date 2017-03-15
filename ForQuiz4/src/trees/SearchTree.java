@@ -2,6 +2,8 @@ package trees;
 
 public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
+	private int size = 0;
+	
 	public boolean isEmpty(){
 		if(getRoot() != null)
 			return true;
@@ -15,6 +17,7 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		
 		if (cur == null) {
 			setRoot(new Node<E>(value));
+			size++;
 			return;
 		}
 		
@@ -22,6 +25,7 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		// tree that is AVL balanced.  We do the work required in insert() to 
 		// maintain those properties.
 		insert(cur, value);
+		size++;
 	}
 
 	private void insert(Node<E> cur, E value) {
@@ -109,6 +113,10 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			return 0;
 		else
 			return slowSize(node.left) + slowSize(node.right) + 1;
+	}
+	
+	public int size(){
+		return size;
 	}
 	
 	private void adjustHeight(Node<E> node){
@@ -302,6 +310,8 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		Node<E> removeMe = getRoot();
 		// adjust removeMe so that it refers to the node containing value,
 		// or is null if value is not present.
+		while(removeMe.data)
+		
 		
 		// step 2: start a recursive call that removes the node discovered.
 		if (removeMe == null)
@@ -331,6 +341,8 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 				node.parent.left = null;
 			else
 				node.parent.right = null;
+			
+			size--;
 		}
 		
 		// step 2 -- if the tree has just one child, promote it
@@ -342,6 +354,8 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 				node.parent.left = node.right;
 			else
 				node.parent.right = node.right;
+			
+			size--;
 		}
 		else if (node.right == null) {
 			// there is just a left child
@@ -351,6 +365,8 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 				node.parent.left = node.left;
 			else
 				node.parent.right = node.left;
+			
+			size--;
 		}
 		else {
 			// two children.  In this case, we find the predecessor of node, swap its value into node,

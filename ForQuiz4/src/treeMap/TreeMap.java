@@ -29,12 +29,12 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V>{
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+		tree.clear();
 	}
 
 	@Override
 	public boolean containsKey(K arg0) {
-		// we dont care what the value is since we only use the key in comparision
+		// we dont care what the value is since we only use the key in comparison
 		return tree.contains(new Pair<K,V>(arg0, null));
 	}
 
@@ -75,7 +75,10 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V>{
 	@Override
 	public void putAll(Map<K, V> arg0) {
 		// TODO Auto-generated method stub
-		
+		Set<K> set = arg0.keySet();
+		for(K key: set){
+			tree.insert(new Pair<K, V>(key, arg0.get(key)));
+		}
 	}
 
 	@Override
