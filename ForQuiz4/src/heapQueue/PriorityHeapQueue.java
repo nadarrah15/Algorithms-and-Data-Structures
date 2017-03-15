@@ -7,8 +7,10 @@ import java.util.NoSuchElementException;
 
 public class PriorityHeapQueue<E extends Comparable<E>> {
 	private ArrayList<E> data;
-	Comparator<E> comp;
-	int size;
+	private Comparator<E> comp;
+	private int size;
+	//for our test class only
+	protected int swap = 0;
 	
 	public PriorityHeapQueue() {
 		data = new ArrayList<>();
@@ -116,12 +118,17 @@ public class PriorityHeapQueue<E extends Comparable<E>> {
 		while (pos > 0 && comp.compare(value,  data.get(parent)) < 0) {
 			// move parent value down to this node
 			data.set(pos,  data.get(parent)); 
+			//a swap
+			swap++;
 			// update pointers
 			pos = parent;
 			parent = parent(pos);
 		}
+		
 		// place the value in the spot where we stop.
 		data.set(pos, value);
+		//a swap
+		swap++;
 	}
 	
 	// push item at pos down to the correct place
