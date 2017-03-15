@@ -2,6 +2,13 @@ package trees;
 
 public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
+	public boolean isEmpty(){
+		if(getRoot() != null)
+			return true;
+		
+		return false;
+	}
+	
 	@Override
 	public void insert(E value) {
 		Node<E> cur = getRoot();
@@ -260,8 +267,10 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			return false;
 		else if(cur.data == value)
 			return true;
-		
-		return contains(cur.left, value) || contains(cur.right, value);
+		else if(cur.data.compareTo(value) < 0)
+			return contains(cur.left, value);
+		else
+			return contains(cur.right, value);
 	}
 
 	@Override
