@@ -12,6 +12,10 @@ public abstract class BinaryTree<E> {
 		this.root = null;
 	}
 	
+	public abstract BinaryTree<E> left();
+	
+	public abstract BinaryTree<E> right();
+	
 	//the garbage collector will completely erase the rest of the tree if there are no external references to any other nodes
 	public void clear(){
 		root = null;

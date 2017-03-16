@@ -5,8 +5,7 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	private int size = 0;
 	
 	public boolean isEmpty(){
-		if(getRoot() != null)
-			return true;
+		if(size == 0) return true;
 		
 		return false;
 	}
@@ -310,7 +309,12 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		Node<E> removeMe = getRoot();
 		// adjust removeMe so that it refers to the node containing value,
 		// or is null if value is not present.
-		while(removeMe.data)
+		while(removeMe.data.compareTo(value) != 0 && removeMe != null){
+			if(removeMe.data.compareTo(value) > 0)
+				removeMe = removeMe.left;
+			else
+				removeMe = removeMe.right;
+		}
 		
 		
 		// step 2: start a recursive call that removes the node discovered.
@@ -382,5 +386,25 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		
 		// issue: what about rotations and heights? How do we tend to them?
 		
+	}
+
+	@Override
+	public BinaryTree<E> left() {
+		SearchTree<E> tree = new SearchTree<E>();
+		tree.setRoot(getRoot().left);
+		
+		return tree;
+	}
+
+	@Override
+	public BinaryTree<E> right() {
+		SearchTree<E> tree = new SearchTree<E>();
+		tree.setRoot(getRoot().right);
+		
+		return tree;
+	}
+	
+	public E getRootValue(){
+		return getRoot().data;
 	}
 }

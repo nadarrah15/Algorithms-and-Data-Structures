@@ -81,4 +81,16 @@ public class RandomTree<E> extends BinaryTree<E> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public BinaryTree<E> left() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BinaryTree<E> right() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
