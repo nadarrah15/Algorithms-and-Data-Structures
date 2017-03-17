@@ -1,0 +1,6 @@
+digraph tree {
+	ratio=0.5;
+	splines=false;
+	5:sw -> 4
+	5:se -> 6
+}

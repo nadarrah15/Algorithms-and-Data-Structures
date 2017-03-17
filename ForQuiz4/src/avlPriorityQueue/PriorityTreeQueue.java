@@ -13,7 +13,6 @@ public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue
 	public PriorityTreeQueue(){
 		tree = new SearchTree<E>();
 		size = 0;
-		it = tree.iterator();
 	}
 	
 	@Override
@@ -27,7 +26,9 @@ public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue
 
 	@Override
 	public E remove() {
-		return it.next();
+		E value = it.next();
+		tree.remove(value);
+		return value;
 	}
 
 	@Override
@@ -53,6 +54,7 @@ public class PriorityTreeQueue<E extends Comparable<E>> implements PriorityQueue
 	@Override
 	public void add(E value) {
 		tree.insert(value);
+		it = tree.iterator();
 		size++;
 	}
 }

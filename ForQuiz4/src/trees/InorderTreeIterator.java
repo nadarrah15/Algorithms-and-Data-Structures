@@ -25,8 +25,12 @@ public class InorderTreeIterator<E> extends TreeIterator<E> {
 				cur = cur.left;
 		}
 		else if(cur.parent != null && cur == cur.parent.right){
-			while(cur == cur.parent.right)
+			while(cur.parent != null && cur == cur.parent.right)
 				cur = cur.parent;
+			
+			if(cur.parent == null)
+				cur = null;
+				
 		}
 		else{
 			cur = cur.parent;

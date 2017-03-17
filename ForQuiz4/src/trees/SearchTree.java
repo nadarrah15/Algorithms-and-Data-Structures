@@ -127,15 +127,19 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	
 	// Four node rotation methods. See the reading on canvas.
 	private void rotateWithLeftChild(Node<E> cur) {
+		boolean flag = false;
+		if(cur == getRoot())
+			flag = true;
+		
 		Node<E> parent = cur.parent;
 		Node<E> L = cur.left;
 		Node<E> LR = cur.left.right;
 		if (parent != null) {
 			if (parent.left == cur) {
-				parent.left = cur.left;
+				parent.left = L;
 			}
 			else {
-				parent.right = cur.left;
+				parent.right = L;
 			}
 		}
 		L.parent = parent;
@@ -155,11 +159,15 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		adjustHeight(cur);
 		adjustHeight(L);
 		
-		if(cur == getRoot())
+		if(flag)
 			setRoot(L);
 	}
 
 	private void rotateWithRightChildOfLeft(Node<E> cur) {
+		boolean flag = false;
+		if(cur == getRoot())
+			flag = true;
+		
 		Node<E> parent = cur.parent;
 		Node<E> LR = cur.left.right;
 		Node<E> L = cur.left;
@@ -192,11 +200,15 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		adjustHeight(cur);
 		adjustHeight(LR);
 		
-		if(cur == getRoot())
+		if(flag)
 			setRoot(LR);
 	}
 
 	private void rotateWithRightChild(Node<E> cur) {
+		boolean flag = false;
+		if(cur == getRoot())
+			flag = true;
+		
 		Node<E> parent = cur.parent;
 		Node<E> R = cur.right;
 		if(parent != null){
@@ -221,11 +233,15 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		adjustHeight(cur);
 		adjustHeight(R);
 		
-		if(cur == getRoot())
+		if(flag)
 			setRoot(R);
 	}
 
 	private void rotateWithLeftChildOfRight(Node<E> cur) {
+		boolean flag = false;
+		if(cur == getRoot())
+			flag = true;
+		
 		Node<E> parent = cur.parent;
 		Node<E> RL = cur.right.left;
 		Node<E> R = cur.right;
@@ -258,7 +274,7 @@ public class SearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		adjustHeight(cur);
 		adjustHeight(RL);
 		
-		if(cur == getRoot())
+		if(flag)
 			setRoot(RL);
 	}
 

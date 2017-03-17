@@ -23,6 +23,10 @@ public class HashMap<K, V> implements Map<K,V> {
 		load = 0;
 	}
 	
+	public HashMap(){
+		this(997);
+	}
+	
 	// put the value into the table.  If key is already present, update the associated value.
 	// return the value that was already present, or null if the key is new.
 	public V put(K key, V value) {
@@ -120,7 +124,31 @@ public class HashMap<K, V> implements Map<K,V> {
 		ArrayList<Pair<K,V>> newTable = new ArrayList<>(table.size() * 2);
 		
 		// put all the values currently in the table in the new table.
-		newTable.addAll(table);
+		for(int i = 0; i < table.size(); i++){
+			if(table.get(i) != null){
+				K key = table.get(i).key;
+				V value = table.get(i).value;
+				int spot = Math.abs(key.hashCode()) % newTable.size();
+				
+				while (true) {
+					Pair<K, V> p = newTable.get(spot);
+					if (p == null || p.reserved) {
+						// found an empty spot
+						newTable.set(spot, new Pair<K,V>(key, value));
+						load++;
+						break;
+					}
+					else if (p.key.equals(key)) {
+						// found a spot occupied by this key.
+						V oldValue = p.value;
+						p.value = value;
+						break;
+					}
+					else // nothing yet
+						spot = (spot+1) % newTable.size();
+				}
+			}
+		}
 				
 		// put the new table in place
 		table = newTable;
