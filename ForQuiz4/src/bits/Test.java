@@ -7,8 +7,8 @@ public class Test {
 	}
 	
 	static int setTenBitsToTheRight(int i){
-		int j = i | (1 << 10); //1 << 10 == 0010 0000 0000 
-		return j;
+		i |= (1 << 10); //1 << 10 == 0010 0000 0000 
+		return i;
 	}
 	
 	static boolean isNinthBitZero(int i){
