@@ -12,16 +12,30 @@ public class AMGraph {
 		outDegree = new int[N];
 	}
 	
-	public AMGraph transitiveClosure(){
+	public AMGraph floydWarshalls(){
 		AMGraph result = new AMGraph(graph.length, isDirected);
 		
 		//clone the graph
+		result.graph = graph.clone();
+		
 		for(int i = 0; i < graph.length; i++){
 			for(int j = 0; j < graph.length; j++){
-				if(getEdge(i, j) != 0)
-					result.addEdge(i, j, getEdge(i, j));
+				for(int k = 0; k < graph.length; k++){
+					if(hasEdge(i, j) && hasEdge(j, k) && (!hasEdge(i, k) || (hasEdge(i, k) && getEdge(i, j) + getEdge(j, k) < getEdge(i, k)))){
+							addEdge(i, k, getEdge(i, j) + getEdge(j, k));	
+					}
+				}
 			}
 		}
+		
+		return result;
+	}
+	
+	public AMGraph warshalls(){
+		AMGraph result = new AMGraph(graph.length, isDirected);
+		
+		//clone the graph
+		result.graph = graph.clone();
 		
 		for(int i = 0; i < graph.length; i++){
 			for(int j = 0; j < graph.length; j++){
